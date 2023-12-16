@@ -19,20 +19,35 @@ export class UserService {
     user.username = createUserDto.username;
     user.email = createUserDto.email;
     user.password = createUserDto.password;
-    user.isActive = true;
-    return this.usersRepository.save(user);
+    const createdUser = this.usersRepository.save(user).then((user) => {
+      delete user.password;
+      return user;
+    });
+    return createdUser;
   }
 
   async findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+    const users = this.usersRepository.find().then((users) =>
+      users.map((user) => {
+        delete user.password;
+        return user;
+      }),
+    );
+    return users;
+
   }
 
   findOne(id: number): Promise<User> {
-    return this.usersRepository.findOneBy({ id: id });
+    const user = this.usersRepository.findOneBy({ id: id }).then((user) => {
+      delete user.password;
+      return user;
+    });
+    return user;
+
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    return this.usersRepository.update(id, updateUserDto);
   }
 
   async remove(id: number): Promise<void> {
