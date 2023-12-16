@@ -20,8 +20,6 @@ export class UserService {
     user.email = createUserDto.email;
     user.password = createUserDto.password;
     user.isActive = true;
-
-
     return this.usersRepository.save(user);
   }
 
