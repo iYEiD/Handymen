@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Input Example</title>
+</head>
+
+<body>
+
+    <form id="availabilityForm">
+        <label for="desiredTime">Desired Time:</label>
+        <input type="date" id="desiredTime" name="desiredTime" required>
+        <button type="button" onclick="checkAvailability()">Check Availability</button>
+    </form>
+
+    <script>
+        function checkAvailability() {
+            // Get the desired time value from the input
+            const desiredTimeInput = document.getElementById('desiredTime');
+            const desiredTimeValue = desiredTimeInput.value;
+
+            // You can now use the desiredTimeValue in your JavaScript logic or send it to the server.
+            console.log('Desired Time:', desiredTimeValue);
+
+            // Add your logic to send the time to the server or perform any other actions.
+        }
+    </script>
+
+</body>
+
+</html>
