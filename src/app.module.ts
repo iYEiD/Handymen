@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServiceModule } from './service/service.module';
 import { BookingModule } from './booking/booking.module';
+import { ReviewModule } from './review/review.module';
 
 
 @Module({
@@ -17,7 +18,7 @@ import { BookingModule } from './booking/booking.module';
     database: 'handyman',
     autoLoadEntities: true,
     synchronize: true,
-  }), UserModule, ServiceModule, BookingModule],
+  }), UserModule, ServiceModule, BookingModule, ReviewModule],
   controllers: [AppController],
   providers: [AppService],
 })
