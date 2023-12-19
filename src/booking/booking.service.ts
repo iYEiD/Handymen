@@ -61,6 +61,12 @@ export class BookingService {
     return this.bookingRepository.save({ ...bookingToUpdate, ...updateBookingDto });
   }
 
+  async removeForUser(bookingId: number, userId: number): Promise<void> {
+    const bookingToRemove = await this.findOneForUser(userId, bookingId);
+    if (!bookingToRemove) throw new Error('Booking not found');
+    await this.bookingRepository.remove(bookingToRemove);
+  }
+
   async remove(id: number): Promise<void> {
     const bookingToRemove = await this.findOne(id);
     if (!bookingToRemove) throw new Error('Booking not found');

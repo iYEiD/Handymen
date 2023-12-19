@@ -37,8 +37,15 @@ export class BookingController {
     return this.bookingService.update(+id, updateBookingDto);
   }
 
+
+  @Delete(':bookingId/user/:userId')
+  removeForUser(@Param('bookingId') bookingId: string, @Param('userId') userId: string) {
+    return this.bookingService.removeForUser(+bookingId, +userId);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bookingService.remove(+id);
   }
+
 }
