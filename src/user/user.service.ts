@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { LoginUserDto } from './dto/login-user-dto';
 
 @Injectable()
 export class UserService {
@@ -53,4 +54,16 @@ export class UserService {
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
+
+  async login(loginUserDto: LoginUserDto): Promise<User> {
+
+    const user = await this.usersRepository.findOne({ where: { username: loginUserDto.username } });
+    if (user && user.password === loginUserDto.password) {
+      delete user.password;
+      return user;
+    }
+    return null;
+
+  }
+
 }
