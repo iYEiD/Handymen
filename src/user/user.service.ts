@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -71,7 +71,8 @@ export class UserService {
       delete user.password;
       return user;
     }
-    return null;
+
+    throw new HttpException('Invalid username or password', HttpStatus.UNAUTHORIZED);
 
   }
 
