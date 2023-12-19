@@ -47,6 +47,15 @@ export class UserService {
 
   }
 
+  async updatePassword(id: number, oldPassword: string, newPassword: string): Promise<boolean> {
+    const user = await this.usersRepository.findOne({ where: { id: id } });
+    if (user && user.password === oldPassword && newPassword !== oldPassword) {
+      user.password = newPassword;
+      await this.usersRepository.update(id, user);
+      return true;
+    }
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return this.usersRepository.update(id, updateUserDto);
   }
